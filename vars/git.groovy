@@ -1,6 +1,2 @@
-@Library('my-Library') _
+echo "Hello"
 
-// vars/git.groovy
-def call() {
-    echo "Hello"
-}
