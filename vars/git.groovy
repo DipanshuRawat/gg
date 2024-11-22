@@ -1,2 +1,4 @@
-echo "Hello"
+def call() {
+    echo "Dipanshu"
+}
 
