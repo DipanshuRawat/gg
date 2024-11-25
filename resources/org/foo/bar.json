@@ -1,1 +1,6 @@
+// File: resources/org/foo/bar.json
+{
+    "greeting": "Hello",
+    "farewell": "Goodbye"
+}
 
