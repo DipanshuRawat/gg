@@ -1,12 +1,17 @@
-// Inside your shared library (my-Library)
+// Inside your shared library (vars/installMongo.groovy)
 def call(Map params = [:]) {
-    def playbook = params.get('playbook', 'resources/org/foo/installmongo.yml')  // Default if not passed
-    def inventory = params.get('inventory', 'resources/org/foo/hosts')  // Default if not passed
+    def playbook = params.get('playbook', 'resources/org/foo/installmongo.yml')  // Default playbook path
+    def inventory = params.get('inventory', 'resources/org/foo/hosts')          // Default inventory path
+    def credentialsId = params.get('sshKey', '1dfb88aa-b117-42bf-a70a-12e98a81d7d1') // Credential ID
 
-    // Fetch SSH key from Jenkins credentials
-    def sshKey = params.get('sshKey', credentials('3d11f520-4c0f-4e15-acd0-404b4398863d'))  // Replace with your credential ID
-
-    sh """
-        ansible-playbook -i ${inventory} ${playbook} --private-key ${sshKey}
-    """
+    // Use Jenkins credentials securely
+    withCredentials([sshUserPrivateKey(credentialsId: credentialsId, 
+                                       keyFileVariable: 'SSH_KEY', 
+                                       usernameVariable: 'SSH_USER')]) {
+        sh """
+            ansible-playbook -i ${inventory} ${playbook} \
+                             --private-key=${SSH_KEY} \
+                             -u ${SSH_USER}
+        """
+    }
 }
