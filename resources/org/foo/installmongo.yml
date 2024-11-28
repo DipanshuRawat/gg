@@ -1,5 +1,5 @@
 - name: Install and Configure MongoDB on Ubuntu
-  hosts: ansi # Replace 'web' with your target host/group
+  hosts: all # Replace 'web' with your target host/group
   become: yes
   tasks:
 
