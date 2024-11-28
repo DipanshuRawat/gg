@@ -7,8 +7,7 @@ def call(Map params = [:]) {
     // Use Jenkins credentials securely
     withCredentials([sshUserPrivateKey(credentialsId: credentialsId)]) {
         sh """
-            ansible-playbook -i ${inventory} ${playbook} \
-                             --private-key=${credentialsId}
+            ansible-playbook -i ${inventory} ${playbook}
         """
     }
 }
