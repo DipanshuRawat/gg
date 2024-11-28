@@ -5,13 +5,10 @@ def call(Map params = [:]) {
     def credentialsId = params.get('sshKey', '1dfb88aa-b117-42bf-a70a-12e98a81d7d1') // Credential ID
 
     // Use Jenkins credentials securely
-    withCredentials([sshUserPrivateKey(credentialsId: credentialsId, 
-                                       keyFileVariable: 'SSH_KEY', 
-                                       usernameVariable: 'SSH_USER')]) {
+    withCredentials([sshUserPrivateKey(credentialsId: credentialsId)]) {
         sh """
             ansible-playbook -i ${inventory} ${playbook} \
-                             --private-key=${SSH_KEY} \
-                             -u ${SSH_USER}
+                             --private-key=${SSH_KEY}
         """
     }
 }
