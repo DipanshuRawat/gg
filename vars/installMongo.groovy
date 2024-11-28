@@ -8,7 +8,7 @@ def call(Map params = [:]) {
     withCredentials([sshUserPrivateKey(credentialsId: credentialsId)]) {
         sh """
             ansible-playbook -i ${inventory} ${playbook} \
-                             --private-key=${SSH_KEY}
+                             --private-key=${credentialsId}
         """
     }
 }
