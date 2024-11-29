@@ -1,7 +1,7 @@
 def call(String status, String channel) {
     if (status == 'SUCCESS') {
-        echo "Notifying ${channel}: Task completed successfully."
+        slackSend channel: 'msn', message: 'Success'
     } else {
-        echo "Notifying ${channel}: Task failed."
+        slackSend channel: 'msn', message: 'Fail'
     }
 }
