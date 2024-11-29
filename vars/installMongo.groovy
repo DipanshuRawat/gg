@@ -1,5 +1,4 @@
 def call() {
-    sh """
     ansiblePlaybook(
                         credentialsId: '1dfb88aa-b117-42bf-a70a-12e98a81d7d1',
                         disableHostKeyChecking: true,
@@ -8,5 +7,5 @@ def call() {
                         playbook: 'workspace/resources/org/foo/installmongo.yml',
                         vaultTmpPath: ''
                     )
-    """
+
 }
